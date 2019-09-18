@@ -2,25 +2,25 @@ package newscorp.newscorpaustralia
 
 import android.app.Dialog
 import android.content.DialogInterface
-import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
-
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_main.*
 import android.content.Intent
 import android.net.Uri
+import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import ikartiks.expensetracker.viewmodel.MainViewModel
-import ikartiks.expensetracker.viewmodel.ViewModelFactory
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_main.*
+import newscorp.newscorpaustralia.base.ActivityBase
+import newscorp.newscorpaustralia.network.SimpleGetService
+import newscorp.newscorpaustralia.viewmodel.MainViewModel
+import newscorp.newscorpaustralia.viewmodel.ViewModelFactory
 
 
-class MainActivity : ActivityBase(), View.OnClickListener,DialogInterface.OnCancelListener {
+class MainActivity : ActivityBase(), View.OnClickListener, DialogInterface.OnCancelListener {
 
-    private lateinit var viewModel:MainViewModel
+    private lateinit var viewModel: MainViewModel
+    private lateinit var simpleGetService: SimpleGetService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,31 +28,41 @@ class MainActivity : ActivityBase(), View.OnClickListener,DialogInterface.OnCanc
         setSupportActionBar(toolbar)
 
         val factory = ViewModelFactory(application)
-        //val addViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-        // note we are calling get method on factory and not onCreate, so it will decide if
-        // it wants to reuse old instance or create new using create method in our factory
         viewModel = ViewModelProviders.of(this, factory).get(MainViewModel::class.java)
 
+        simpleGetService = SimpleGetService(this)
 
-        //score.text = "$userScore of $totalQuestions"
-        loadCurrentQuestion()
-        //loadNextQuestion()
+        if (viewModel.questionsArray.isEmpty()) {
+            if (isConnected()) {
+                showLoadingDialog(listOf(getString(R.string.loading)), true)
+                simpleGetService.start {
+                    viewModel.initialize(it)
+                    loadCurrentQuestion()
+                }
+            } else {
+                showCustomMessage(getString(R.string.connect_to_net))
+            }
+        } else {
+            loadCurrentQuestion()
+        }
 
         optionThree.setOnClickListener(this)
         optionTwo.setOnClickListener(this)
         optionOne.setOnClickListener(this)
         skip.setOnClickListener(this)
         readArticle.setOnClickListener(this)
-
-        //showCustomMessage(data.product!!)
     }
 
-    fun loadCurrentQuestion(){
+    private fun loadCurrentQuestion() {
 
-        score.text = "${viewModel.userScore} of ${viewModel.totalQuestions}"
+        score.text = getString(
+            R.string.questions_answered_correctly,
+            viewModel.userScore,
+            viewModel.totalQuestions * 2
+        )
         val question = viewModel.getCurrentQuestion()
 
-        if(question==null)
+        if (question == null)
             showCustomMessage(getString(R.string.over))
 
         question?.let {
@@ -62,19 +72,24 @@ class MainActivity : ActivityBase(), View.OnClickListener,DialogInterface.OnCanc
             val requestOption = RequestOptions().placeholder(placeHolder)
             glide.load(it.imageUrl).apply(requestOption).into(image)
 
-            standfirst.text= question.standFirst
-            optionOne.text = question.headlines.get(0)
-            optionTwo.text = question.headlines.get(1)
-            optionThree.text = question.headlines.get(2)
+            standfirst.text = question.standFirst
+            optionOne.text = question.headlines[0]
+            optionTwo.text = question.headlines[1]
+            optionThree.text = question.headlines[2]
         }
+        hideLoadingDialog()
     }
 
-    fun loadNextQuestion(){
+    private fun loadNextQuestion() {
 
-        score.text = "Score ${viewModel.userScore} of ${viewModel.totalQuestions}"
+        score.text = getString(
+            R.string.score_questions_answered_correctly,
+            viewModel.userScore,
+            viewModel.totalQuestions * 2
+        )
         val question = viewModel.getNextQuestion()
 
-        if(question==null)
+        if (question == null)
             showCustomMessage(getString(R.string.over))
 
         question?.let {
@@ -84,78 +99,62 @@ class MainActivity : ActivityBase(), View.OnClickListener,DialogInterface.OnCanc
             val requestOption = RequestOptions().placeholder(placeHolder)
             glide.load(it.imageUrl).apply(requestOption).into(image)
 
-            standfirst.text= question.standFirst
+            standfirst.text = question.standFirst
             optionOne.text = question.headlines.get(0)
             optionTwo.text = question.headlines.get(1)
             optionThree.text = question.headlines.get(2)
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
 
     override fun onClick(view: View?) {
 
         val currentQuestion = viewModel.getCurrentQuestion()
-        var dialog:Dialog? =null
-        when(view?.id){
-            R.id.optionOne ->{
+        val dialog: Dialog?
+        when (view?.id) {
+            R.id.optionOne -> {
 
-                if(currentQuestion?.correctAnswerIndex==0){
+                if (currentQuestion?.correctAnswerIndex == 0) {
                     viewModel.incrementUserScore()
-                    dialog= CustomDialog(this,true,this,currentQuestion)
-                }else{
+                    dialog = CustomDialog(this, true, this, currentQuestion)
+                } else {
                     viewModel.decrementUserScore()
-                    dialog= CustomDialog(this,false,this,currentQuestion)
+                    dialog = CustomDialog(this, false, this, currentQuestion)
 
                 }
 
-                dialog?.show()
+                dialog.show()
             }
-            R.id.optionTwo ->{
+            R.id.optionTwo -> {
 
-                if(currentQuestion?.correctAnswerIndex==1){
-                    dialog= CustomDialog(this,true,this,currentQuestion)
+                if (currentQuestion?.correctAnswerIndex == 1) {
+                    dialog = CustomDialog(this, true, this, currentQuestion)
                     viewModel.incrementUserScore()
-                }else{
-                    dialog= CustomDialog(this,false,this,currentQuestion)
+                } else {
+                    dialog = CustomDialog(this, false, this, currentQuestion)
                     viewModel.decrementUserScore()
                 }
-                dialog?.show()
+                dialog.show()
 
             }
-            R.id.optionThree ->{
-                if(currentQuestion?.correctAnswerIndex==2){
-                    dialog= CustomDialog(this,true,this,currentQuestion)
+            R.id.optionThree -> {
+                if (currentQuestion?.correctAnswerIndex == 2) {
+                    dialog = CustomDialog(this, true, this, currentQuestion)
                     viewModel.incrementUserScore()
-                }else{
-                    dialog= CustomDialog(this,false,this,currentQuestion)
+                } else {
+                    dialog = CustomDialog(this, false, this, currentQuestion)
                     viewModel.decrementUserScore()
                 }
-                dialog?.show()
+                dialog.show()
             }
-            R.id.readArticle ->{
-
+            R.id.readArticle -> {
                 val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(currentQuestion?.storyUrl))
-                if(resolveActivity(browserIntent))
+                if (resolveActivity(browserIntent))
                     startActivity(browserIntent)
                 else
                     showCustomMessage(getString(R.string.browser))
             }
-            R.id.skip ->{
+            R.id.skip -> {
                 loadNextQuestion()
             }
         }

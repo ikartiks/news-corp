@@ -1,138 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/std_margin"
         tools:context=".MainActivity">
 
-    <androidx.appcompat.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/score"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
             android:layout_margin="@dimen/std_margin"
-            tools:text=" 0 of 20 "
-    />
+            android:gravity="center"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text=" 0 of 20 " />
 
-    <ImageView
+        <ImageView
             android:id="@+id/image"
-
-            android:adjustViewBounds="true"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:maxHeight="480dp"
-            tools:src="@drawable/ic_launcher_background"
-            app:layout_constraintDimensionRatio="16:9"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/score"
             android:layout_margin="@dimen/std_margin"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/article_image"
+            android:maxHeight="480dp"
+            app:layout_constraintDimensionRatio="16:9"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/score"
+            tools:src="@drawable/ic_launcher_background" />
 
-    />
-
-    <androidx.appcompat.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/standfirst"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            tools:text="standand first text standand first text standand first text standand first textstandand first text standand first text"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/image"
             android:layout_margin="@dimen/std_margin"
-            android:textSize="@dimen/text_size_large"
-    />
+            android:textSize="@dimen/app_text_size_large"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image"
+            tools:text="standand first text standand first text standand first text standand first textstandand first text standand first text" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/optionOne"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="option one"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/standfirst"
             android:layout_margin="@dimen/std_margin"
-            android:gravity="center"
             android:background="@drawable/options_bg"
+            android:gravity="center"
             android:padding="@dimen/std_padding"
-    />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/standfirst"
+            tools:text="option one" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/optionTwo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="option 2"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/optionOne"
             android:layout_margin="@dimen/std_margin"
-            android:gravity="center"
             android:background="@drawable/options_bg"
+            android:gravity="center"
             android:padding="@dimen/std_padding"
-    />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/optionOne"
+            tools:text="option 2" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/optionThree"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="option 3"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/optionTwo"
             android:layout_margin="@dimen/std_margin"
-            android:gravity="center"
             android:background="@drawable/options_bg"
+            android:gravity="center"
             android:padding="@dimen/std_padding"
-    />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/optionTwo"
+            tools:text="option 3" />
 
-
-
-
-    <androidx.appcompat.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/readArticle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/std_margin"
+            android:layout_marginEnd="@dimen/std_margin"
+            android:layout_marginRight="@dimen/std_margin"
+            android:layout_marginBottom="@dimen/std_margin"
+            android:background="@drawable/buttons_bg"
+            android:padding="@dimen/std_padding"
             android:text="@string/read"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
             app:layout_constraintEnd_toStartOf="@id/skip"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/optionThree"
-            android:layout_marginRight="@dimen/std_margin"
-            android:layout_marginTop="@dimen/std_margin"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:background="@drawable/buttons_bg"
-            android:padding="@dimen/std_padding"
-    />
+            app:layout_constraintTop_toBottomOf="@id/optionThree" />
 
-    <androidx.appcompat.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/skip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="0dp"
-            android:layout_marginRight="0dp"
-            android:text="@string/skip_this_question"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/readArticle"
-            app:layout_constraintTop_toBottomOf="@id/optionThree"
+            android:layout_marginStart="@dimen/std_margin"
             android:layout_marginLeft="@dimen/std_margin"
             android:layout_marginTop="@dimen/std_margin"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="@dimen/std_margin"
             android:background="@drawable/buttons_bg"
             android:padding="@dimen/std_padding"
-    />
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
-
+            android:text="@string/skip_this_question"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/readArticle"
+            app:layout_constraintTop_toBottomOf="@id/optionThree" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

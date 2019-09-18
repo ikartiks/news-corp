@@ -1,96 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/transparent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
 
     <LinearLayout
-            android:id="@+id/successContainer"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/round_bg"
-            android:orientation="vertical"
+        android:id="@+id/successContainer"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_bg"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/that"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:gravity="center"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent">
-
-        <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/that"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/that_s_correct"
-                android:textSize="@dimen/text_size_large"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-
-        />
+            android:text="@string/that_s_correct"
+            android:textColor="@color/black"
+            android:textSize="@dimen/app_text_size_large" />
 
         <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/colorPrimary"
-                android:layout_marginLeft="@dimen/pop_margin"
-                android:layout_marginRight="@dimen/pop_margin"></View>
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/pop_margin"
+            android:layout_marginRight="@dimen/pop_margin"
+            android:background="@color/colorPrimary" />
 
         <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/point"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/_1_point"
-                android:textSize="@dimen/text_size_large"
-                android:textColor="@color/white"
-                android:layout_margin="@dimen/std_margin"
-
-        />
+            android:id="@+id/point"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/std_margin"
+            android:gravity="center"
+            android:text="@string/_1_point"
+            android:textColor="@color/black"
+            android:textSize="@dimen/app_text_size_large"
+            android:textStyle="bold" />
 
         <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/colorPrimary"
-                android:layout_marginLeft="@dimen/pop_margin"
-                android:layout_marginRight="@dimen/pop_margin"></View>
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/pop_margin"
+            android:layout_marginRight="@dimen/pop_margin"
+            android:background="@color/colorPrimary" />
 
         <androidx.appcompat.widget.AppCompatTextView
-
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/for_you"
-                android:textSize="@dimen/text_size_large"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-
-        />
+            android:id="@+id/forYou"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/for_you"
+            android:textColor="@color/black"
+            android:textSize="@dimen/app_text_size_large" />
 
 
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_large"
-            android:textColor="@color/red"
-            app:layout_constraintTop_toBottomOf="@id/successContainer"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_margin="@dimen/std_margin"/>
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/std_margin"
+        android:background="@color/red"
+        android:gravity="center"
+        android:padding="@dimen/std_padding"
+        android:textColor="@color/black"
+        android:textSize="@dimen/app_text_size_large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/successContainer"
+        tools:text="Hello how are you" />
 
     <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/close"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/close"
-            android:textSize="@dimen/text_size_large"
-            android:textColor="@color/colorAccent"
-            app:layout_constraintTop_toBottomOf="@id/name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_margin="@dimen/std_margin"/>
+        android:id="@+id/close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/std_margin"
+        android:background="@drawable/buttons_bg"
+        android:padding="@dimen/std_padding"
+        android:text="@string/close"
+        android:textColor="@color/white"
+        android:textSize="@dimen/app_text_size_large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/name" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

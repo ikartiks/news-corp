@@ -6,9 +6,16 @@
     <string name="browser">Unable to open browser</string>
     <string name="close">close</string>
     <string name="for_you">For you</string>
-    <string name="_1_point">+ 1 point</string>
-    <string name="that_s_correct">That\'s correct</string>
-    <string name="incorrect">That\'s incorrect</string>
-    <string name="minus">-1 point</string>
+    <string name="_1_point">+ 2 Points</string>
+    <string name="that_s_correct">🙂 Correct!</string>
+    <string name="incorrect">Wrong</string>
+    <string name="incorrect_for_you">😞</string>
+    <string name="minus">-1 Point</string>
     <string name="over">Quiz over</string>
+    <string name="loading">Loading the game</string>
+    <string name="questions_answered_correctly">%1$d of %2$d points</string>
+    <string name="score_questions_answered_correctly">Score(in points): %1$d of %2$d</string>
+    <string name="correct_answer">Correct answer is: %1$s</string>
+    <string name="article_image">Article image</string>
+    <string name="connect_to_net">Connect to the internet and try again</string>
 </resources>

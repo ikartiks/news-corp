@@ -1,4 +1,4 @@
-package ikartiks.expensetracker.viewmodel
+package newscorp.newscorpaustralia.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.ViewModel

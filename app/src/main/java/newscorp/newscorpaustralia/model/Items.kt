@@ -3,7 +3,7 @@ package newscorp.newscorpaustralia.model
 class Items {
     lateinit var standFirst: String
 
-    var correctAnswerIndex: Int =0
+    var correctAnswerIndex: Int = 0
 
     lateinit var imageUrl: String
 

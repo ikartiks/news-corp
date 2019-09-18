@@ -1,50 +1,43 @@
-package ikartiks.expensetracker.viewmodel
+package newscorp.newscorpaustralia.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import com.google.gson.Gson
-import newscorp.newscorpaustralia.R
 import newscorp.newscorpaustralia.model.Game
 import newscorp.newscorpaustralia.model.Items
 
 
-class MainViewModel (val applicationX: Application) : AndroidViewModel(applicationX) {
+class MainViewModel(applicationX: Application) : AndroidViewModel(applicationX) {
 
-    var currentQuestion = -1
-    var totalQuestions:Int = 0
+    private var currentQuestion = -1
+    var totalQuestions: Int = 0
     var userScore = 0
-    var  questionsArray:ArrayList<Items>
+    var questionsArray: ArrayList<Items> = ArrayList()
 
-    init {
-        val  gson =  Gson()
-        val reader =  applicationX.resources.openRawResource(R.raw.codebeautify)
-        val inputAsString = reader.bufferedReader().use { it.readText() }
-        val data = gson.fromJson(inputAsString, Game::class.java)
-        questionsArray = data.items
-        totalQuestions = questionsArray.size
+    fun initialize(game: Game) {
+        questionsArray = game.items
+        totalQuestions = game.items.size
     }
 
-    fun getNextQuestion():Items?{
-
+    fun getNextQuestion(): Items? {
         currentQuestion++
-        if(currentQuestion<=totalQuestions)
-            return questionsArray.get(currentQuestion)
+        if (currentQuestion <= totalQuestions)
+            return questionsArray[currentQuestion]
         return null
     }
 
-    fun getCurrentQuestion():Items?{
-
-        if(currentQuestion==-1)
+    fun getCurrentQuestion(): Items? {
+        if (currentQuestion == -1)
             currentQuestion++
-        if(currentQuestion<=totalQuestions)
-            return questionsArray.get(currentQuestion)
+        if (currentQuestion <= totalQuestions)
+            return questionsArray[currentQuestion]
         return null
     }
 
-    fun incrementUserScore(){
-        userScore++
+    fun incrementUserScore() {
+        userScore += 2
     }
-    fun decrementUserScore(){
+
+    fun decrementUserScore() {
         userScore--
     }
 }
