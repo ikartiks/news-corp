@@ -22,12 +22,12 @@ I have made certain assumptions and completed the project. These assumptions are
 ### Installation
 
 ```sh
-use the git clone hhttps://github.com/ikartiks/news-corp.git in Android Studio
+use the git clone https://github.com/ikartiks/news-corp.git in Android Studio
 This should get it done
 ```
 
 ### Todos
  - Optimise if required, as per comments above.
  - Modules can be further separated out
- - I generally use Dagger for injecting dependencies, but not in this case
+ - I generally use Dagger for injecting dependencies, but not in this case, as the app is too small
 
